@@ -1,0 +1,82 @@
+* { 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+.brand-black, .brand-black a, .brand-black span  {
+    color: #1A1A26 !important;
+}
+
+.brand-white, .brand-white a, .brand-white span  {
+  color: #FFFFFF !important;
+}
+
+.brand-yellow, .brand-yellow a, .brand-yellow span  {
+    color: #FCB349 !important;
+}
+
+.brand-purple, .brand-purple a, .brand-purple span {
+  color: #240C41 !important;
+}
+
+.section {
+    width: 100%;
+    height: 100vh;
+  }
+  
+.section-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+  
+.section-inner .pair {
+    height: 100%;
+  } 
+  
+.section-inner .pair.left {
+    width: 50%;
+    background-color: #240C41; 
+  }
+  
+.section-inner .pair.right {
+    width: 50%;
+  background-image: url("/images/essentials/image 65.png");
+  background-position: center;
+  background-size: contain;
+}
+
+.left-side {
+  background-color: #240C41;
+}
+
+.signup-btn {
+  border: 1px solid #FCB349; /* White border */
+  color: white; /* White text */
+  background-color: transparent; /* Transparent background */
+  padding: 10px 20px; /* Padding for the button */
+  border-radius: 5px; /* Rounded corners, optional */
+  transition: all 0.3s ease; /* Smooth transition effect */
+}
+
+.signup-btn:hover {
+  border-color: #FCB349; /* Yellow border on hover */
+  color: black; /* Black text on hover */
+  background-color: #FCB349; /* Yellow background on hover */
+}
+
+input::placeholder {
+  color: white !important;
+}
+
+.form-group .eye-icon {
+  right: 1.2rem;
+  top: 30%;
+}
+
+
+
+
+
+
