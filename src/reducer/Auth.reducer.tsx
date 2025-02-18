@@ -9,6 +9,7 @@ export const authReducer = (state: AuthState, action: AuthAction): AuthState => 
       case "AUTH_FAILURE":
         return { ...state, isLoading: false, error: action.payload };
       case "LOGOUT":
+        localStorage.removeItem("token");
         return { ...state, user: null, isAuthenticated: false };
       case 'CLEAR_ERROR':
         return { ...state, error: null };

@@ -117,7 +117,7 @@ const Signup = () => {
                 <span className="input-group-text text-white bg-transparent">🇳🇬 +234</span>
                 <input
                   type="tel"
-                  className="form-control bg-transparent"
+                  className="form-control bg-transparent text-white"
                   placeholder="Phone number"
                   onChange={(e) => {
                     setPhoneNumber(e.target.value);

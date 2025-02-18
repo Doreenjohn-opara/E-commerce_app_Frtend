@@ -7,16 +7,14 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Spinner from "react-bootstrap/esm/Spinner";
 import { useAuth } from "../../Hook/useAuth.hook";
 import { authService } from "../../services/Auth.service";
+import { NotificationContext } from "../../context/Notification.context";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false); // Loading state
-  const [notification, setNotification] = useState<{
-    message: string;
-    type: "success" | "error";
-  } | null>(null); // Notification state
+  const { showNotification } = useContext(NotificationContext);
   const { dispatch } = useAuth();
   const navigate = useNavigate();
 
@@ -24,15 +22,12 @@ const ResetPassword = () => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      setNotification({ message: "Passwords do not match", type: "error" });
+      showNotification( "Passwords do not match", "error" );
       return;
     }
 
     if (newPassword.length < 8) {
-      setNotification({
-        message: "Password must be at least 8 characters long",
-        type: "error",
-      });
+      showNotification("Password must be at least 8 characters long", "error");
       return;
     }
 
@@ -40,10 +35,9 @@ const ResetPassword = () => {
     const userId = searchParams.get("id"); // Get user ID from URL query parameters
 
     if (!token || !userId) {
-      setNotification({
-        message: "Invalid reset password request. Missing token or user ID.",
-        type: "error",
-      });
+      showNotification(
+         "Invalid reset password request. Missing token or user ID.", "error"
+      );
       return;
     }
 
@@ -52,21 +46,14 @@ const ResetPassword = () => {
     try {
       await authService.resetPassword(token, userId, newPassword);
       dispatch({ type: "AUTH_SUCCESS", payload: null });
-      setNotification({
-        message:
-          "Password reset successful. Please log in with your new password.",
-        type: "success",
-      });
+      showNotification("Password reset successful. Please log in with your new password.", "success");
       navigate("/login");
     } catch (error: any) {
       dispatch({
         type: "AUTH_FAILURE",
         payload: error.response?.data?.message || "Failed to reset password",
       });
-      setNotification({
-        message: error.response?.data?.message || "Failed to reset password",
-        type: "error",
-      });
+      showNotification( "Failed to reset password", "error");
     } finally {
       setLoading(false); // Set loading to false when the request ends
     }
@@ -77,17 +64,6 @@ const ResetPassword = () => {
       <div className="d-flex vh-100">
         {/* Left Side */}
         <div className="left-side d-flex flex-column justify-content-center align-items-left text-light w-50 p-5 font-aeonik">
-          {notification && (
-            <div
-              className="position-fixed top-0 start-50 translate-middle-x"
-              style={{ zIndex: 1050 }}>
-              <AlertNotification
-                message={notification.message}
-                type={notification.type}
-                onClose={() => setNotification(null)}
-              />
-            </div>
-          )}
           <h1 className="mb-4 fs-4">KOP MALL</h1>
           <h2 className="mb-4 fs-4">Change Password</h2>
           <p className="text-md-left mb-4">Enter your new password</p>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import TextInput from "../../components/partials/inputs/Text.input";
 import PasswordInput from "../../components/partials/inputs/Password.input";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -6,6 +6,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Hook/useAuth.hook";
 import { authService } from "../../services/Auth.service";
+import { NotificationContext } from "../../context/Notification.context";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false)
     const { state, dispatch } = useAuth();
+    const { showNotification } = useContext(NotificationContext);
 
 
   // Load saved credentials
@@ -29,7 +31,13 @@ const Login = () => {
     setLoading(true);
     dispatch({ type: "AUTH_START" })
     try {
-      const response = await authService.login(email, password)
+      const response = await authService.login(email, password);
+
+      if (response.token) {  // Ensure the token exists
+        localStorage.setItem("token", response.token); // Store the token
+        localStorage.setItem("userId", response.data._id);
+    };
+    
       dispatch({ type: "AUTH_SUCCESS", payload: response.user })
       if (rememberMe) {
         localStorage.setItem("rememberMe", "true")
@@ -40,9 +48,11 @@ const Login = () => {
         localStorage.removeItem("email")
         localStorage.removeItem("password")
       }
-      navigate("/dashboard")
+      showNotification('user logged in successfully', 'success')
+      navigate("/")
     } catch (error: any) {
       dispatch({ type: "AUTH_FAILURE", payload: error.response?.data?.message || "Login failed" })
+      showNotification('Login Failed', 'error')
     } finally {
         setLoading(false) // Set loading to false when the signup process ends
       }

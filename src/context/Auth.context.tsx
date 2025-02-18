@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, ReactNode } from "react";
+import React, { createContext, useReducer, ReactNode, useEffect } from "react";
 import { authReducer } from "../reducer/Auth.reducer";
 import { AuthAction, AuthContextType, AuthState } from "../utils/types.utils";
 
@@ -16,6 +16,15 @@ export const AuthContext = createContext<AuthContextType>({
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch({ type: "AUTH_SUCCESS", payload: {} });
+    } else {
+      dispatch({ type: "AUTH_FAILURE", payload: "Authentication failed" });
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>

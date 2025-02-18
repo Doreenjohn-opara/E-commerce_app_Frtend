@@ -5,7 +5,7 @@ import { INotificationProps } from '../../../utils/interface.utils';
 const AlertNotification: React.FC<INotificationProps> = ({ message, type, onClose }) => {
   return (
     <div className={`alert alert-${type} alert-dismissible fade show`} role="alert">
-      {message}
+        {message}
       <button type="button" className="btn-close" aria-label="Close" onClick={onClose}></button>
     </div>
   );

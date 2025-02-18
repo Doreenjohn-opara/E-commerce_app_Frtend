@@ -16,7 +16,7 @@ const Button = (props: IButton) => {
                     className='btn font-aeonik-bold onwhite' 
                     onClick={onClick} 
                     type="button"
-                    style={{ backgroundColor: color }} // Apply the color prop
+                    style={{ backgroundColor: color}} // Apply the color prop
                 >
                     {text}
                 </button> 

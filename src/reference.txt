@@ -751,3 +751,77 @@ th {
   font-size: 20px;
   cursor: pointer;
 }
+
+
+
+import React from 'react';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
+
+const Categories = () => {
+  return (
+    <ListGroup variant="flush">
+      <ListGroupItem className="d-flex justify-content-between align-items-center">
+        <span>
+          <i className="bi bi-phone"></i>
+          {' '}Phones & Tablets
+        </span>
+      </ListGroupItem>
+      <ListGroupItem className="d-flex justify-content-between align-items-center">
+        <span>
+          <i className="bi bi-laptop"></i>
+          {' '}Appliances
+        </span>
+      </ListGroupItem>
+      <ListGroupItem className="d-flex justify-content-between align-items-center">
+        <span>
+          <i className="bi bi-pc-display"></i>
+          {' '}Computing
+        </span>
+      </ListGroupItem>
+      <ListGroupItem className="d-flex justify-content-between align-items-center">
+        <span>
+          <i className="bi bi-watch"></i>
+          {' '}Wearable Tech
+        </span>
+      </ListGroupItem>
+      <ListGroupItem className="d-flex justify-content-between align-items-center">
+        <span>
+          <i className="bi bi-cart-fill"></i>
+          {' '}Supermarket
+        </span>
+      </ListGroupItem>
+      <ListGroupItem className="d-flex justify-content-between align-items-center">
+        <span>
+          <i className="bi bi-camera-fill"></i>
+          {' '}Cameras
+        </span>
+      </ListGroupItem>
+      <ListGroupItem className="d-flex justify-content-between align-items-center">
+        <span>
+          <i className="bi bi-controller"></i>
+          {' '}Gaming
+        </span>
+      </ListGroupItem>
+      <ListGroupItem className="d-flex justify-content-between align-items-center">
+        <span>
+          <i className="bi bi-house-door-fill"></i>
+          {' '}Land & Properties
+        </span>
+      </ListGroupItem>
+      <ListGroupItem className="d-flex justify-content-between align-items -center">
+        <span>
+          <i className="bi bi-basket-fill"></i>
+          {' '}Fashion
+        </span>
+      </ListGroupItem>
+      <ListGroupItem className="d-flex justify-content-between align-items-center">
+        <span>
+          <i className="bi bi-book-fill"></i>
+          {' '}Books
+        </span>
+      </ListGroupItem>
+    </ListGroup>
+  );
+};
+
+export default Categories;

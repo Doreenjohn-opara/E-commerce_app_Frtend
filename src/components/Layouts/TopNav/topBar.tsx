@@ -28,7 +28,7 @@ const TopBar = () => {
             </button>
             <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="languageDropdown">
                 <Link to="#" className="dropdown-item">English</Link>
-                <Link to="#" className="dropdown-item">English</Link>
+                <Link to="#" className="dropdown-item">French</Link>
                 <Link to="#" className="dropdown-item">Spanish</Link>
             </ul>
           </div>

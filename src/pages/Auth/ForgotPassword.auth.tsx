@@ -19,7 +19,7 @@ const ForgotPassword = () => {
         try {
           await authService.forgotPassword(email)
           dispatch({ type: "AUTH_SUCCESS", payload: null })
-          navigate("/verify-token")
+          navigate("/verify-token/:token")
         } catch (error: any) {
           dispatch({ type: "AUTH_FAILURE", payload: error.response?.data?.message || "Failed to send reset email" })
         } finally {
@@ -58,7 +58,12 @@ const ForgotPassword = () => {
                 Resetting...
               </>
             ) : (
-              "Reset Password"
+              <Link
+              to="/check-email"
+              className="text-white text-decoration-none"
+              >
+                Reset Password
+              </Link>              
             )}
             </button>
           </form>
